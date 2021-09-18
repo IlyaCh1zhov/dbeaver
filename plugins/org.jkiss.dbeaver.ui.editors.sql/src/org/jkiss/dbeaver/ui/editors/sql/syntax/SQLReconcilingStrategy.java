@@ -232,7 +232,7 @@ public class SQLReconcilingStrategy implements IReconcilingStrategy, IReconcilin
                 .map(SQLScriptElementImpl::getAnnotation)
                 .toArray(Annotation[]::new);
         model.modifyAnnotations(deletions, additions, null);
-        cache.removeAll(deletedPositions);
+        deletedPositions.forEach(cache::remove);
         cache.addAll(additions.values());
     }
 
