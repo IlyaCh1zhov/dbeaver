@@ -41,7 +41,7 @@ public class MySQLCreateDatabaseDialog extends BaseDialog
     private MySQLCollation collation;
 
     public MySQLCreateDatabaseDialog(Shell parentShell, MySQLCatalog database) {
-        super(parentShell, "Create database", null);
+        super(parentShell, MySQLServerUIMessages.dialog_create_database_title, null);
         this.database = database;
     }
 
@@ -53,13 +53,13 @@ public class MySQLCreateDatabaseDialog extends BaseDialog
         GridData gd = new GridData(GridData.FILL_HORIZONTAL);
         group.setLayoutData(gd);
 
-        final Text nameText = UIUtils.createLabelText(group, "Database name", "");
+        final Text nameText = UIUtils.createLabelText(group, MySQLServerUIMessages.dialog_create_database_database_name, "");
         nameText.addModifyListener(e -> {
             name = nameText.getText().trim();
             getButton(IDialogConstants.OK_ID).setEnabled(!name.isEmpty());
         });
 
-        final Combo charsetCombo = UIUtils.createLabelCombo(group, "Charset", SWT.BORDER | SWT.DROP_DOWN);
+        final Combo charsetCombo = UIUtils.createLabelCombo(group, MySQLServerUIMessages.dialog_create_database_charset, SWT.BORDER | SWT.DROP_DOWN);
         for (MySQLCharset cs : database.getDataSource().getCharsets()) {
             charsetCombo.add(cs.getName());
         }
@@ -73,7 +73,7 @@ public class MySQLCreateDatabaseDialog extends BaseDialog
         }
         charsetCombo.setText(charset.getName());
 
-        final Combo collationCombo = UIUtils.createLabelCombo(group, "Collation", SWT.BORDER | SWT.DROP_DOWN);
+        final Combo collationCombo = UIUtils.createLabelCombo(group, MySQLServerUIMessages.dialog_create_database_collation, SWT.BORDER | SWT.DROP_DOWN);
         for (MySQLCollation col : charset.getCollations()) {
             collationCombo.add(col.getName());
         }
